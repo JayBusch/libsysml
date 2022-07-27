@@ -3,7 +3,7 @@
 
 #include <string>
 
-int ParseFile(std::string path);
+int ParseFile(const std::string& path);
 
 
 #endif  // LIBSYSML_SYSML_H_
