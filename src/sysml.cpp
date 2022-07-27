@@ -2,15 +2,15 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <boost/spirit/home/x3.hpp>
+#include "sysml.hpp"
+#include <string>
 
-int main()
-{
-	//
-	while (true) {
-		std::cout << "Hello libsysml!!!" << std::endl;
-		sleep(2);
-	}
+
+int ParseFile(std::string path){
+
+	std::cout << "Parsing: " << path << std::endl;
 
 	return 0;
+
 }
 
