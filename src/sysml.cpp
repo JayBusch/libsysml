@@ -1,13 +1,22 @@
 #include <unistd.h>
 #include <iostream>
-#include <SFML/Graphics.hpp>
 #include <boost/spirit/home/x3.hpp>
+
 #include "sysml.hpp"
 #include <string>
 #include <fstream>
 #include <sstream>
 
+#include "kerml_ast.hpp"
+#include "kerml_ast_adapted.hpp"
+#include "element.hpp"
 
+namespace x3 = boost::spirit::x3;
+namespace ascii = boost::spirit::x3::ascii;
+
+using x3::lit;
+using x3::lexeme;
+using ascii::char_;
 
 int ParseFile(const std::string& path){
 
@@ -21,17 +30,15 @@ int ParseFile(const std::string& path){
 		return -1;
 	}
 
-//	std::string fileContents = std::string((std::istreambuf_iterator<char>(input_file)), std::istreambuf_iterator<char>());
-
-//	std::cout << "File Contents: " << std::endl << std::endl << fileContents << std::endl;
 
 	std::string line;
+
+
 	while (std::getline(input_file,line)){
 
-		double rN = 0.0;
-        	double iN = 0.0;
-        	auto fr = [&](auto& ctx){ rN = boost::spirit::x3::_attr(ctx); };
-        	auto fi = [&](auto& ctx){ iN = boost::spirit::x3::_attr(ctx); };
+        	auto foundElement = [&](auto& ctx){ 
+			std::cout << "Found element" << std::endl;
+		};
 
 		auto start = line.begin();
 		auto end = line.end();
@@ -39,9 +46,7 @@ int ParseFile(const std::string& path){
 		bool parsed = boost::spirit::x3::phrase_parse(start,end,
 		//  Begin grammar
             	(
-                    	'(' >> boost::spirit::x3::double_[fr]
-                        	>> -(',' >> boost::spirit::x3::double_[fi]) >> ')'
-                	|   boost::spirit::x3::double_[fr]
+                    	lit("element") >> lexeme[char_[foundElement]] >> ';'
             	)
         	//  End grammar
 			,boost::spirit::x3::ascii::space );

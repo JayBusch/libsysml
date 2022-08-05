@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.18)
 
-project(libsysml)
+project(libsysml LANGUAGES C CXX)
+
+set(CMAKE_BUILD_TYPE Debug)
+SET(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
+SET(CMAKE_C_FLAGS_DEBUG "-O0 -g")
 
 add_subdirectory(dependencies)
 
