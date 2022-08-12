@@ -3,6 +3,9 @@
 
 #include <string>
 
+#include "model.hpp"
+
+
 int ParseFile(const std::string& path);
 
 

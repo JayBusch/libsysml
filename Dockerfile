@@ -35,6 +35,8 @@ RUN apt update &&\
 	libwebp-dev \
 	libxext-dev \
 	libsdl2-dev \
+	tao-pegtl-dev \
+	libstdc++6-10-dbg \
 	cmake &&\
     apt clean
 

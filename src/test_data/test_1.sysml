@@ -1,4 +1,7 @@
-element <testID> ELEMENTID
-(123.45, 987.65)
-(244.4, 300.2)
-23.3
+element <testShortNameOne>;
+element < testShortNameTwo > ;
+element <  testShortNameThree>;
+element testNameFour;
+element           testNameFive;
+element <testShortNameSix> testNameSix;
+element <       testShortNameSeven     >            testNameSeven;

@@ -1,20 +1,20 @@
-#if !defined(ELEMENT_HPP)
-#define ELEMENT_HPP
+#ifndef LIBSYSML_ELEMENT_H_
+#define LIBSYSML_ELEMENT_H_
 
-#include <boost/spirit/home/x3.hpp>
+class element {
+	public:
+		std::string id;
+		std::string shortName;
+		std::string name;
 
-#include "kerml_ast.hpp"
+		friend inline std::ostream& operator<<( std::ostream& o, const element& e ) {
+			o << "id: " << e.id << std::endl;
+			o << "shortName: " << e.shortName << std::endl;
+			o << "name: " << e.name << std::endl;
+			return o;
+		}
 
-namespace kerml
-{
-    namespace parser
-    {
-        namespace x3 = boost::spirit::x3;
-        using element_type = x3::rule<class element, kerml::ast::element>;
-        BOOST_SPIRIT_DECLARE(element_type);
-    }
+};
 
-    parser::element_type element();
-}
 
-#endif
+#endif  // LIBSYSML_ELEMENT_H_
