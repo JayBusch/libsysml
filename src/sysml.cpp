@@ -12,32 +12,39 @@ namespace pegtl = tao::pegtl;
 
 #include "sysml_parser.hpp"
 
-int ParseFile(const std::string& path){
+void ParseString (const std::string& input, model& systemModel) {
+	
+	pegtl::memory_input<> in(input, "");
+
+	if ( pegtl::parse< sysml_parser::grammar, 
+			sysml_parser::action >( in, systemModel ) ) {
+		return;
+	} else {
+		SysmlParseException e;
+		throw e;
+
+	}
+}
+
+void ParseFile(const std::string& path, model& systemModel){
 
 	std::cout << "Parsing: " << path << std::endl;
 
 	std::ifstream input_file(path);
 
 	if (!input_file.is_open()) {
-		std::cerr << "Could not open the file - '"
-			<< path << "'" << std::endl;
-		return -1;
+		throw std::runtime_error("Could not open file");
 	}
 
 	pegtl::file_input<> in(path);
-	model systemModel;
 
 	if ( pegtl::parse< sysml_parser::grammar, 
 			sysml_parser::action >( in, systemModel ) ) {
-		std::cout << "PARSE SUCCESS!!!" << std::endl;
-		std::cout << "systemModel: " << systemModel << std::endl;
+		return;
 
 	} else {
-		std::cerr << "PARSE ERROR" << std::endl;
-		std::cout << "systemModel: " << systemModel << std::endl;
-
-		return -2;
+		SysmlParseException e;
+		throw e;
 	}
-	return 0;
 }
 

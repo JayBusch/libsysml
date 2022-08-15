@@ -5,8 +5,15 @@
 
 #include "model.hpp"
 
+class SysmlParseException : public std::exception {
+    public:
+	    const char* what () {
+		    return (const char*)"Exception parsing Sysml";
+	    }
+};
 
-int ParseFile(const std::string& path);
+void ParseString(const std::string& input, model& systemModel);
+void ParseFile(const std::string& path, model& systemModel);
 
 
 #endif  // LIBSYSML_SYSML_H_

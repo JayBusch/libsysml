@@ -71,7 +71,6 @@ namespace sysml_parser {
 		{
 			std::cout << "shortName = " << in.string() << std::endl;
 			systemModel.last_element().shortName=in.string();
-//			systemModel.last_element().shortName= (in.string().substr(1,in.string().length()-2));
 		}
 	};
 
